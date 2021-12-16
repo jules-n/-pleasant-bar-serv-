@@ -27,4 +27,5 @@ spring:
             trusted:
               packages: sample.kafka
 cloudkarafka:
-  topic: 1ix6np50-menu-update
+  menu-topic: 1ix6np50-menu-update
+  status-topic: 1ix6np50-status-update

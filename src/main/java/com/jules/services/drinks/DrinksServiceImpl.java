@@ -43,16 +43,16 @@ public class DrinksServiceImpl implements DrinksService {
                 component -> {
                     String name = null;
                     var drink = repository.findDrinkByName(nameOfDrinkToDelete);
-                    if(drink.isPresent()) {
-                        if(Objects.requireNonNull(drink.get().getComponents()).isEmpty()
+                    if (drink.isPresent()) {
+                        if (Objects.requireNonNull(drink.get().getComponents()).isEmpty()
                                 && drink.get().getName().equals(nameOfDrinkToDelete)) {
                             name = drink.get().getName();
                         }
-                       if(Objects.requireNonNull(drink.get().getComponents()).isEmpty()){
-                           List<String> includedList =
-                                   findComponent(Objects.requireNonNull(drink.get().getComponents()), nameOfDrinkToDelete);
-                           name = includedList.stream().findFirst().get();
-                       }
+                        if (Objects.requireNonNull(drink.get().getComponents()).isEmpty()) {
+                            List<String> includedList =
+                                    findComponent(Objects.requireNonNull(drink.get().getComponents()), nameOfDrinkToDelete);
+                            name = includedList.stream().findFirst().get();
+                        }
                     }
                     return name;
                 }
@@ -92,14 +92,31 @@ public class DrinksServiceImpl implements DrinksService {
         var allDrinks = repository.findAll();
         allDrinks.forEach(
                 drink -> {
-                    if (drink.getComponents() != null) {
-                        if(drink.getComponents().isEmpty() && drink.getAmount()<drink.getTotalAmount()) {
-                           // positions.add();
+                    var isExistsComponents = drink.getComponents() == null || drink.getComponents().isEmpty();
+                    if (isExistsComponents && drink.getAmount() < drink.getTotalAmount()) {
+                        positions.add(modelMapper.map(drink, DrinkGetDTO.class));
+                    } else {
+                        if (isEnoughAmountsOfComponents(drink, allDrinks)) {
+                            positions.add(modelMapper.map(drink, DrinkGetDTO.class));
                         }
                     }
                 }
         );
         menu.setPositions(positions);
-        return null;
+        return menu;
+    }
+
+    private boolean isEnoughAmountsOfComponents(Drink drink, List<Drink> allDrinks) {
+        return drink.getComponents()
+                .stream()
+                .map(
+                        component -> {
+                            var fullInfoOfComponent = allDrinks.stream().filter(listDrink -> listDrink.getName().equals(component.getDrinkName())).findFirst().get();
+                            if (fullInfoOfComponent.getComponents()==null || fullInfoOfComponent.getComponents().isEmpty()) {
+                                return component.getAmount() <= fullInfoOfComponent.getTotalAmount();
+                            }
+                            return isEnoughAmountsOfComponents(fullInfoOfComponent, allDrinks);
+                        }
+                ).allMatch(result -> result);
     }
 }

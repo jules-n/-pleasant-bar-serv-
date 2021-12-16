@@ -1,6 +1,7 @@
 package com.jules.config;
 
 import com.jules.dtos.DrinkFullInfoDTO;
+import com.jules.dtos.DrinkGetDTO;
 import com.jules.models.Drink;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
@@ -42,6 +43,19 @@ public class ModelMapperConfig {
                     .price(drink.getPrice())
                     .components(drink.getComponents())
                     .totalAmount(drink.getTotalAmount())
+                    .build();
+            return dto;
+        }
+    };
+
+    private Converter<Drink, DrinkGetDTO> drinkToDrinkGetDTOConverter = new AbstractConverter<>() {
+        protected DrinkGetDTO convert(Drink drink) {
+            var dto = DrinkGetDTO.builder()
+                    .amount(drink.getAmount())
+                    .characteristics(drink.getCharacteristics())
+                    .name(drink.getName())
+                    .price(drink.getPrice())
+                    .components(drink.getComponents())
                     .build();
             return dto;
         }

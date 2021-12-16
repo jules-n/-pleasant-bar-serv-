@@ -6,7 +6,7 @@ public enum Status {
     Ready(2),
     Done(3);
 
-    private int index;
+    public int index;
 
     Status(int index) {
         this.index = index;
