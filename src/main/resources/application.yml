@@ -29,3 +29,6 @@ spring:
 cloudkarafka:
   menu-topic: 1ix6np50-menu-update
   status-topic: 1ix6np50-status-update
+mongock:
+  change-logs-scan-package:
+    - com.jules.migration

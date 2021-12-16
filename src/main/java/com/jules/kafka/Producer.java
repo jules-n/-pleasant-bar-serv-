@@ -22,7 +22,6 @@ public class Producer {
         kafkaTemplate.send(topic, message);
         kafkaTemplate.flush();
         kafkaTemplate.destroy();
-       throw new NotImplementedException();
     }
 
 }

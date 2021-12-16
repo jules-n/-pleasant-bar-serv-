@@ -1,12 +1,16 @@
 package com.jules.models;
 
-import lombok.*;
+import com.jules.dtos.DrinkNumberDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +21,7 @@ public class Order {
     public static final String COLLECTION_NAME = "orders";
     @Id
     private Long number;
-    private Map<Drink, Integer> drinks;
+    private List<DrinkNumberDTO> drinks;
     private Status status;
     private double check;
     private LocalDateTime creationTime;

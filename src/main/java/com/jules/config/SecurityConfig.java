@@ -32,16 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/users/register",
                         "/register").permitAll()
-                .mvcMatchers("/users/register/", "/drinks/menu").permitAll()
+                .mvcMatchers("/users/register/", "/drinks/menu/").permitAll()
                 .mvcMatchers("users/update-profile").authenticated()
                 .mvcMatchers("/users/add-rights/").hasRole("admin")
-                .mvcMatchers("/drinks/renew-drink",
-                        "/drinks/update-drink",
-                        "/drinks/add-drink",
-                        "/drinks/delete-drink",
-                        "orders/update-status"
-                        ).hasRole("barman")
-                .mvcMatchers("orders/create-order").hasAnyRole("barman", "waiter")
+                .mvcMatchers("/drinks/renew-drink/").hasRole("barman")
+                .mvcMatchers("/drinks/update-drink/").hasRole("barman")
+                .mvcMatchers("/drinks/add-drink/").hasRole("barman")
+                .mvcMatchers("/drinks/delete-drink/").hasRole("barman")
+                .mvcMatchers("/orders/update-status/").hasRole("barman")
+                .mvcMatchers("/orders/create-order/").hasAnyRole("barman", "waiter")
                 .and().httpBasic()
                 .and().sessionManagement().disable();
     }
