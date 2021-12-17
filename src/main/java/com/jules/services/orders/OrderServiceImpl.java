@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean updateStatus(OrderStatusDTO dto) {
         var existingOrder = orderRepository.findById(dto.getNumber());
         if (existingOrder.isPresent() && existingOrder.get().getStatus().index<dto.getStatus().index) {
-            var order = Order.builder().status(dto.getStatus()).number(dto.getNumber()).build();
+            var order = Order.builder().status(dto.getStatus()).number(dto.getNumber()).table(dto.getTable()).build();
             return orderRepository.updateStatus(order);
         }
         return false;

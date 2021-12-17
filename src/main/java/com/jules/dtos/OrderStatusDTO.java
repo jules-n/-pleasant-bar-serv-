@@ -12,5 +12,6 @@ import org.springframework.data.annotation.Id;
 public class OrderStatusDTO {
     @Id
     private Long number;
+    private int table;
     private Status status;
 }
