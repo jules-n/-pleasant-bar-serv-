@@ -20,4 +20,5 @@ public class DrinkFullInfoDTO {
     private float price;
     private float amount;
     private float totalAmount;
+    @Nullable Set<Component> nonDrinksComponent;
 }

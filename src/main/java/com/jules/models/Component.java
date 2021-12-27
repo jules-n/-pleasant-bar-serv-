@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 @EqualsAndHashCode
 public class Component {
-    private String drinkName;
+    private String name;
     private float amount;
 }

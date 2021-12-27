@@ -24,4 +24,5 @@ public class Drink {
     private float price;
     private float amount;
     private float totalAmount;
+    @Nullable Set<Component> nonDrinksComponent;
 }

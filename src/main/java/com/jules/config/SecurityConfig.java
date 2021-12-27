@@ -40,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/drinks/add-drink/").hasRole("barman")
                 .mvcMatchers("/drinks/delete-drink/").hasRole("barman")
                 .mvcMatchers("/orders/update-status/").hasRole("barman")
+                .mvcMatchers("/ingredients/**").hasRole("barman")
+                .mvcMatchers("/ingredients/*").hasRole("barman")
                 .mvcMatchers("/orders/create-order/").hasAnyRole("barman", "waiter")
                 .and().httpBasic()
                 .and().sessionManagement().disable();

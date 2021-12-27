@@ -17,6 +17,7 @@ public class ModelMapperConfig {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(drinkFullInfoDTOToDrinkConverter);
         modelMapper.addConverter(drinkToDrinkFullInfoDTOConverter);
+        modelMapper.addConverter(drinkToDrinkGetDTOConverter);
         return modelMapper;
     }
 
@@ -29,6 +30,7 @@ public class ModelMapperConfig {
                     .price(dto.getPrice())
                     .components(dto.getComponents())
                     .totalAmount(dto.getTotalAmount())
+                    .nonDrinksComponent(dto.getNonDrinksComponent())
                     .build();
             return drink;
         }
@@ -43,6 +45,7 @@ public class ModelMapperConfig {
                     .price(drink.getPrice())
                     .components(drink.getComponents())
                     .totalAmount(drink.getTotalAmount())
+                    .nonDrinksComponent(drink.getNonDrinksComponent())
                     .build();
             return dto;
         }
@@ -56,6 +59,7 @@ public class ModelMapperConfig {
                     .name(drink.getName())
                     .price(drink.getPrice())
                     .components(drink.getComponents())
+                    .nonDrinksComponent(drink.getNonDrinksComponent())
                     .build();
             return dto;
         }

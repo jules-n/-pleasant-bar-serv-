@@ -22,4 +22,5 @@ public class DrinkGetDTO {
     private Set<Component> components;
     private float price;
     private float amount;
+    @Nullable Set<Component> nonDrinksComponent;
 }
